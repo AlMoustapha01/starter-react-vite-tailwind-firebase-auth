@@ -6,10 +6,13 @@ import * as Yup from 'yup';
 import { ConfirmPopup, confirmPopup } from 'primereact/confirmpopup';
 
 import ProfileImage from '../../assets/images/bussiness-man.png';
+import Icon from '../../assets/images/binary-code.png';
+
 import { useFormik } from 'formik';
 import { useI18nContext } from '../../i18n/i18n-react';
 import { Password } from 'primereact/password';
 import InputTextEditable from '../../components/InputTextEditable';
+import { Helmet, HelmetData } from 'react-helmet-async';
 
 export default function Profile() {
   const { currentUser, updateName, updateEmail, updatePhone, updateUserPassword, deleteCount } = useAuth();
@@ -91,12 +94,21 @@ export default function Profile() {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="UTF-8" />
+        <title>Profile page</title>
+      </Helmet>
       <div className="grid container mx-auto content-center max-w-6xl">
         <h1 className="text-3xl text-center font-bold my-7">{LL.profile.title()}</h1>
         <div>
           <div className="flex items-center justify-between px-7 py-5">
             <div className="flex gap-4 justify-center items-center w-auto">
-              <Avatar className="p-overlay-badge cursor-pointer" image={currentUser?.photoURL || ProfileImage} size="xlarge"></Avatar>
+              <Avatar
+                className="p-overlay-badge cursor-pointer"
+                shape="circle"
+                image={currentUser?.photoURL || ProfileImage}
+                size="xlarge"
+              ></Avatar>
               <p className="font-semibold">{currentUser?.displayName}</p>
             </div>
             <div className="w-auto">

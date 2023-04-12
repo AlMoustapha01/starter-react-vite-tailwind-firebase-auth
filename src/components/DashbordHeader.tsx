@@ -18,33 +18,33 @@ import { useAuth } from '../contexts/AuthContext';
 const OPTIONS = ['FR', 'EN'];
 
 export default function DashboardHeader() {
-  const {currentUser} = useAuth();
+  const { currentUser } = useAuth();
   const [lang, LocationActions] = useLocation();
-  const {logout} = useAuth();
+  const { logout } = useAuth();
   const { LL, locale, setLocale } = useI18nContext();
   const [selectedLang, setSelectedLang] = useState<string>(locale);
   const items = [
     {
       label: 'Profile',
       icon: 'pi pi-user',
-      command:()=>{
-        navigation('/dashbord/profile')
-      }
+      command: () => {
+        navigation('/dashbord/profile');
+      },
     },
     {
       label: 'Deconnexion',
       icon: 'pi pi-power-off',
-      command:()=>{
-        logout()
-      }
+      command: () => {
+        logout();
+      },
     },
     {
-      label:'Retour',
-      icon:'pi pi-arrow-left',
-      command:()=>{
-        navigation(-1)
-      }
-    }
+      label: 'Retour',
+      icon: 'pi pi-arrow-left',
+      command: () => {
+        navigation(-1);
+      },
+    },
   ];
   const op = useRef<OverlayPanel>(null);
   const menu = useRef<Menu>(null);
@@ -79,21 +79,23 @@ export default function DashboardHeader() {
             </div>
           </div>
 
-          <div className="w-auto hidden xl:block">
+          <div className="w-auto">
             <div className="flex flex-wrap items-center">
-              <div className="w-auto hidden lg:block">
-                <div className="flex items-center gap-4 mr-16">
-                  <div>
-                    <Button icon="pi pi-bell" size='large' rounded text aria-label="Filter" />
+              <div className="w-auto">
+                <div className="flex items-center gap-4 md:mr-16">
+                  <div className='mx-2'>
+                    <i className="pi pi-bell p-overlay-badge cursor-pointer" style={{ fontSize: '1.5rem' }}>
+                      <Badge value="2"></Badge>
+                    </i>
                   </div>
                   <div>
                     <Avatar
                       className="p-overlay-badge cursor-pointer"
                       image={currentUser?.photoURL || Profile}
                       size="xlarge"
+                      shape='circle'
                       onClick={(e) => menu.current?.toggle(e)}
                     >
-                      <Badge value="4" severity="danger" />
                     </Avatar>
                     <Menu model={items} popup ref={menu} />
                   </div>
@@ -105,34 +107,7 @@ export default function DashboardHeader() {
               </div>
             </div>
           </div>
-          <div className="card flex justify-content-center xl:hidden">
-            <Button type="button" icon="pi pi-bars" severity="info" outlined onClick={(e) => op.current?.toggle(e)} />
-            <OverlayPanel ref={op}>
-              <div className="grid content-center gap-4 w-full">
-                <div>
-                  <Button
-                    className="w-full"
-                    label={LL.header.login()}
-                    onClick={() => navigation('/login')}
-                    severity="info"
-                    outlined
-                  />
-                </div>
-                <div>
-                  <Button
-                    label={LL.header.sign_up()}
-                    onClick={() => navigation('/signup')}
-                    className="w-full"
-                    severity="warning"
-                    outlined
-                  />
-                </div>
-                <div>
-                  <SelectButton className="w-full" value={selectedLang} onChange={handleLangChange} options={OPTIONS} />
-                </div>
-              </div>
-            </OverlayPanel>
-          </div>
+          
         </div>
       </section>
     </>

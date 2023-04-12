@@ -9,6 +9,7 @@ import * as Yup from 'yup';
 import { useI18nContext } from '../../i18n/i18n-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { FormEvent } from 'react';
+import { Helmet } from 'react-helmet-async';
 
 export default function Login() {
   const { login } = useAuth();
@@ -40,6 +41,9 @@ export default function Login() {
 
   return (
     <>
+      <Helmet>
+        <title>Login page</title>
+      </Helmet>
       <section className="py-16">
         <div className="container px-4 mx-auto">
           <div className="relative max-w-lg mx-auto pt-16 pb-16 px-6 md:px-10 lg:px-16 bg-cyan-900 rounded-xl">

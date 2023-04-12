@@ -10,7 +10,8 @@ import SocialSignin from '../../components/SocialSignin';
 import { useI18nContext } from '../../i18n/i18n-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { capitalizeWords } from '../../utils/auth';
-import { useToast, EToastTypes } from '../../contexts/ToastContext'
+import { useToast, EToastTypes } from '../../contexts/ToastContext';
+import { Helmet } from 'react-helmet-async';
 
 export default function SignUp() {
   const { signup } = useAuth();
@@ -47,12 +48,15 @@ export default function SignUp() {
     onSubmit: (values, { setSubmitting }) => {
       console.log('Form data', values);
       signup(values.email, values.password, capitalizeWords(values.name));
-      
+
       setSubmitting(false);
     },
   });
   return (
     <>
+      <Helmet>
+        <title>Signup page</title>
+      </Helmet>
       <section className="py-16">
         <div className="container px-4 mx-auto">
           <div className="relative max-w-lg mx-auto pt-16 pb-16 px-6 md:px-10 lg:px-16 bg-cyan-900 rounded-xl">

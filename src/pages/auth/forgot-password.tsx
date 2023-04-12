@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import { useI18nContext } from '../../i18n/i18n-react';
 import FingerPrint from '../../assets/images/fingerprint.png';
 import { useAuth } from '../../contexts/AuthContext';
+import { Helmet } from 'react-helmet-async';
 
 export default function ForgotPassword() {
   const { resetPassword } = useAuth();
@@ -29,6 +30,9 @@ export default function ForgotPassword() {
   });
   return (
     <>
+      <Helmet>
+        <title>Forgot password page</title>
+      </Helmet>
       <section className="py-36">
         <div className="container px-4 mx-auto">
           <div className="relative max-w-lg mx-auto pt-16 pb-16 px-6 md:px-10 lg:px-16 bg-cyan-900 rounded-xl">
@@ -45,14 +49,25 @@ export default function ForgotPassword() {
                   <label htmlFor="email" className="text-white font-semibold">
                     Email
                   </label>
-                  <InputText type="email" placeholder="email" id="email" className={`w-full text-white bg-transparent ${formik.touched.email && formik.errors.email ?'p-invalid':''}`} {...formik.getFieldProps('email')} />
+                  <InputText
+                    type="email"
+                    placeholder="email"
+                    id="email"
+                    className={`w-full text-white bg-transparent ${
+                      formik.touched.email && formik.errors.email ? 'p-invalid' : ''
+                    }`}
+                    {...formik.getFieldProps('email')}
+                  />
                   {formik.touched.email && formik.errors.email ? (
                     <div className="text-red-500">{formik.errors.email}</div>
                   ) : null}
                 </div>
 
                 <div className="flex justify-center text-center">
-                  <Button type='submit' className="block w-full py-4 my-4 leading-6 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200">
+                  <Button
+                    type="submit"
+                    className="block w-full py-4 my-4 leading-6 text-white font-semibold bg-blue-500 hover:bg-blue-600 rounded-lg transition duration-200"
+                  >
                     Reset password
                   </Button>
                 </div>
